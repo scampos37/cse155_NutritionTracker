@@ -1,0 +1,11 @@
+div{
+    display: grid;
+}
+
+div.pieChart{
+    background-color: blue;
+    
+}
+td{
+    text-align: center;
+}
