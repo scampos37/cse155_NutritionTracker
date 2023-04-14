@@ -54,7 +54,7 @@ new Chart("totalChart", {
     labels: nutrition,
     datasets: [{
       backgroundColor: barColors,
-      data: tvalues
+      data: tvalues,
     }]
   },
   options: {

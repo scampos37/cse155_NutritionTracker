@@ -7,15 +7,14 @@
         
     </header>
     <!-- grey because working on this at 4am is too bright -->
-    <body style="background-color: grey;">
+    <body style="background-color: #CCD7C5;">
         <div class="title">
-            <h1>Nutrition Tracker</h1>
+            <h1 style="text-align: center;">Nutrition Tracker</h1>
         </div>
         <div class="grid-container">
-        <div style="height: 400px;"><canvas class="chart1" id="totalChart"></canvas></div>
-        <div style="height: 400px;"><canvas class="chart2" id="mealChart"></canvas></div>
+        <div style="height: 350px;"><canvas class="chart1" id="totalChart"></canvas></div>
+        <div style="height: 350px;"><canvas class="chart2" id="mealChart"></canvas></div>
         <div class="totalValues">
-          <h3 style="text-align: center;">Total Calories</h3>
             <table>
                 <tr>
                   <th>Type:</th>
@@ -75,7 +74,34 @@
                 </tr>
               </table>
         </div>
-        
+        <div class="mealCals">
+          <table>
+            <tr>
+              <th>Meal</th>
+              <th>Calories</th>
+            </tr>
+            <tr>
+              <td>Breakfast</td>
+              <td class="breakfast">null</td>
+            </tr>
+            <tr>
+              <td>Lunch</td>
+              <td class="lunch">null</td>
+            </tr>
+            <tr>
+              <td>Dinner</td>
+              <td class="dinner">null</td>
+            </tr>
+            <tr>
+              <td>Snacks</td>
+              <td class="snack">null</td>
+            </tr>
+          </table>
+        </div>
+        <div class="buttons">
+          <button>Remove Entry</button>
+          <button>Add Entry</button>
+        </div>
       </div>
       <script src="scripts.js"></script>
     </body>
