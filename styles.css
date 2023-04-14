@@ -1,11 +1,28 @@
-div{
+.grid-container{
     display: grid;
+    grid-template-columns: 400px 400px;
+    grid-auto-rows: minmax(150px, auto);
+    grid-gap: 20px;
 }
 
-div.pieChart{
-    background-color: blue;
-    
+.totalValues{
+    grid-column: span 1;
+    grid-row: 2/3;
 }
-td{
+
+table, th, td{
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid black;
+    border-collapse: collapse;
     text-align: center;
+}
+
+.chart1{
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+.chart2{
+    grid-column: 2/3;
+    grid-row: 1/2;
 }

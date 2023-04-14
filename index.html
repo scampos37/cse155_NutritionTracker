@@ -3,15 +3,19 @@
     <header>
         <title>Nutrition Tracker</title>
         <link rel="stylesheet" href="styles.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        
     </header>
-    <body>
+    <!-- grey because working on this at 4am is too bright -->
+    <body style="background-color: grey;">
         <div class="title">
             <h1>Nutrition Tracker</h1>
         </div>
-        <div class="pieChart">
-            <p>Insert Pie Chart Here</p>
-        </div>
+        <div class="grid-container">
+        <div style="height: 400px;"><canvas class="chart1" id="totalChart"></canvas></div>
+        <div style="height: 400px;"><canvas class="chart2" id="mealChart"></canvas></div>
         <div class="totalValues">
+          <h3 style="text-align: center;">Total Calories</h3>
             <table>
                 <tr>
                   <th>Type:</th>
@@ -19,7 +23,7 @@
                 </tr>
                 <tr>
                   <td>Calories:</td>
-                  <td class="calVal">null</td>
+                  <td class="calVal">10</td>
                 </tr>
                 <tr>
                   <td>Carbes:</td>
@@ -39,37 +43,40 @@
                 </tr>
                 <tr>
                   <td>Poly Fat:</td>
-                  <td>null</td>
+                  <td class="polyVal">null</td>
                 </tr>
                 <tr>
                   <td>Potassium:</td>
-                  <td>null</td>
+                  <td class="PotVal">null</td>
                 </tr>
                 <tr>
                   <td>Protein:</td>
-                  <td>null</td>
+                  <td class="ProVal">null</td>
                 </tr>
                 <tr>
                   <td>Saturated Fat:</td>
-                  <td>null</td>
+                  <td class="SatVal">null</td>
                 </tr>
                 <tr>
                   <td>Sodium:</td>
-                  <td>null</td>
+                  <td class="SodVal">null</td>
                 </tr>
                 <tr>
                   <td>Sugars:</td>
-                  <td>null</td>
+                  <td class="SugVal">null</td>
                 </tr>
                 <tr>
                   <td>Total Fat:</td>
-                  <td>null</td>
+                  <td class="TotalVal">null</td>
                 </tr>
                 <tr>
                   <td>Trans Fat:</td>
-                  <td>null</td>
+                  <td class="TransVal">null</td>
                 </tr>
               </table>
         </div>
+        
+      </div>
+      <script src="scripts.js"></script>
     </body>
 </html>
