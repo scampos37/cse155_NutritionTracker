@@ -2,7 +2,7 @@
 <html>
     <header>
         <title>Nutrition Tracker</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="istyles.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
         
     </header>
@@ -15,7 +15,7 @@
         <div style="height: 350px;"><canvas class="chart1" id="totalChart"></canvas></div>
         <div style="height: 350px;"><canvas class="chart2" id="mealChart"></canvas></div>
         <div class="totalValues">
-            <table>
+            <table style="width: 100%;">
                 <tr>
                   <th>Type:</th>
                   <th>Total Value</th>
@@ -75,7 +75,7 @@
               </table>
         </div>
         <div class="mealCals">
-          <table>
+          <table style="width: 100%;">
             <tr>
               <th>Meal</th>
               <th>Calories</th>
@@ -99,8 +99,8 @@
           </table>
         </div>
         <div class="buttons">
-          <button>Remove Entry</button>
-          <button>Add Entry</button>
+          <button type="button" class="delbtn">Delete Entry</button>
+          <button onclick="location.href = 'entry.html';" type="button" class="addbtn" id="addbtn">Add Entry</button>
         </div>
       </div>
       <script src="scripts.js"></script>

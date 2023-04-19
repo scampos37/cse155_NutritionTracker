@@ -1,0 +1,52 @@
+.grid-container{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: minmax(50px, auto);
+    grid-gap: 20px;
+}
+
+.title{
+    border: solid black;
+    text-align: center;
+    grid-column: span 4;
+    grid-row: span 1;
+}
+
+.image{
+    border: solid black;
+    grid-column: span 2;
+    grid-row: span 3;
+}
+
+.btns{
+    border: solid red;
+    grid-column: span 1;
+    grid-row: span 1;
+    margin: auto;
+}
+.dataTables{
+    border: solid red;
+    grid-column: span 2;
+    grid-row: span 1;
+}
+table, th, td{
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+button{
+    text-align: center;
+    background-color: #068d9d;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+}
+
+button:hover{
+    background-color: #36bdcd;
+    color: black;
+}
