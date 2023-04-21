@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>AddEntry</title>
+        <title>Confirm Data</title>
         <link rel="stylesheet" href="styles.css">
     </head>
     <body style="background-color: #CCD7C5;">
-        <div class="grid-container">
-            <div class="title4"><h1>Upload Page</h1></div>
-            <div class="image">
-                <img src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" style="width: 100%; height: auto; margin:auto;">
+        <div class="grid-containerc">
+            <div class="title2"><h1>Confirm Data</h1></div>
+            <div class="txtEntry">
+                <label for="mealchoice">Meal:</label>
+                <select name="mealchoice" id="mealchoice">
+                    <option value="breakfast">Breakfast</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="dinner">Dinner</option>
+                    <option value="snack">Snack</option>
+                </select>
             </div>
-            <div class="btns">
-                <button class="importImage">Import Image</button>
-            </div>
-            <div class="btns">
-                <button class="takePicture">Take Picture</button>
+            <div class="txtEntry">
+                <form>
+                    <label for="servingsize">Serving Size:</label>
+                    <input type="number" id="servingsize" name="servingsize">
+                </form>
             </div>
             <div class="dataTables">
                 <table style="width: 100%;">
@@ -79,12 +85,8 @@
                     </tr>
                   </table>
             </div>
-            <div class="btns">
-                <button onclick="location.href = 'index.html';" class="cancelbtn">Cancel</button>
-            </div>
-            <div class="btns">
-                <button onclick="location.href = 'confirm.html';" class="continuebtn">Continue</button>
-            </div>
+            <div class="btns"><button onclick="location.href='index.html';" id="cancelbtn">Cancel</button></div>
+            <div class="btns"><button onclick="location.href='index.html';" id="submitbtn">Submit</button></div>
         </div>
     </body>
 </html>
