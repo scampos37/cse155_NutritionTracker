@@ -2,18 +2,16 @@
 <html>
     <header>
         <title>Nutrition Tracker</title>
-        <link rel="stylesheet" href="istyles.css">
+        <link rel="stylesheet" href="styles.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
         
     </header>
     <!-- grey because working on this at 4am is too bright -->
     <body style="background-color: #CCD7C5;">
-        <div class="title">
-            <h1 style="text-align: center;">Nutrition Tracker</h1>
-        </div>
-        <div class="grid-container">
-        <div style="height: 350px;"><canvas class="chart1" id="totalChart"></canvas></div>
-        <div style="height: 350px;"><canvas class="chart2" id="mealChart"></canvas></div>
+      <div class="grid-container">
+        <div class="title"><h1 style="text-align: center;">Nutrition Tracker</h1></div>
+        <div class="chart"><canvas id="totalChart"></canvas></div>
+        <div class="chart"><canvas id="mealChart"></canvas></div>
         <div class="totalValues">
             <table style="width: 100%;">
                 <tr>
@@ -98,8 +96,10 @@
             </tr>
           </table>
         </div>
-        <div class="buttons">
+        <div class="btns">
           <button type="button" class="delbtn">Delete Entry</button>
+        </div>
+        <div class="btns">
           <button onclick="location.href = 'entry.html';" type="button" class="addbtn" id="addbtn">Add Entry</button>
         </div>
       </div>

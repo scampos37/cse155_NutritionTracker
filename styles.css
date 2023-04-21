@@ -7,7 +7,6 @@
 }
 
 .title{
-    border: solid black;
     text-align: center;
     grid-column: span 4;
     grid-row: span 1;
@@ -19,14 +18,29 @@
     grid-row: span 3;
 }
 
+.totalValues{
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.mealCals{
+    
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.chart{
+    height: 350px;
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
 .btns{
-    border: solid red;
     grid-column: span 1;
     grid-row: span 1;
     margin: auto;
 }
 .dataTables{
-    border: solid red;
     grid-column: span 2;
     grid-row: span 1;
 }
@@ -50,3 +64,4 @@ button:hover{
     background-color: #36bdcd;
     color: black;
 }
+
