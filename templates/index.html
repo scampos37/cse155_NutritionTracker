@@ -2,7 +2,7 @@
 <html>
     <header>
         <title>Nutrition Tracker</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="../static/css/styles.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
         
     </header>
@@ -100,9 +100,12 @@
           <button type="button" class="delbtn">Delete Entry</button>
         </div>
         <div class="btns">
-          <button onclick="location.href = 'entry.html';" type="button" class="addbtn" id="addbtn">Add Entry</button>
+          <button type="button" class="addbtn" id="addbtn">
+            <a href="{{url_for('entry')}}">Add Entry</a>
+          </button>
+          
         </div>
       </div>
-      <script src="scripts.js"></script>
+      <script src="../static/js/scripts.js"></script>
     </body>
 </html>
