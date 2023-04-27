@@ -1,0 +1,34 @@
+Test sets:
+    Standard
+    Colored
+    Skew
+    Shadow
+    Curved
+
+Possibly be able to log accuracy for:
+    individual labels
+    each nutrient
+
+Nutrients appear in a defined order.
+The order:
+    Calories
+    Total Fat
+    Sat Fat
+    Trans Fat
+    Poly Fat
+    Mono Fat
+    Cholesterol
+    Sodium
+    Potassium
+    Total Carbs
+    Fiber
+    Sugars
+    Protein
+
+How do we incorporate this idea?
+list<(trash_key, trash_value, line number)> and list<keyword>
+Graph matching is based on edit distance b/t
+    edit_d(trash_key, keyword)
+
+Try machine learning for categorization (feature extraction)
+Look at histograms of images, characterize histograms based on common features

@@ -10,7 +10,7 @@ const path = require('path');
 
 // Define the path to the JSON file
 const inputPath = 'labelRecognizer/python/ocr_results.json';
-const outputPath = '/Users/drew/CSE_155/cse155_NutritionTracker/LabelExtractionModel/Results/labelList.json';
+const outputPath = './LabelExtractionModel/Results/labelList.json';
 
 const outputDir = path.dirname(outputPath);
 
