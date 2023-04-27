@@ -14,6 +14,7 @@ from PIL import Image
 from timeit import default_timer as timer
 from subprocess import call
 from attrdict import AttrDict
+import json
 
 
 def test_labels(dirpath, labels=None):
@@ -221,6 +222,18 @@ def end_to_end(impath, show=False, demo=False):
     if show:
         draw_image(label_im, 'Transformed label: %s' % impath)
 
+
+    #Added by team to export results from model in the form of a JSON object
+    labels = []
+    labels.append(ocr_label)
+    
+    json_str = jsonpickle.encode(labels)
+
+    with open("ocr_results.json", "w") as f:
+        f.write(json_str)
+    #
+
+
     return ocr_label
 
 
@@ -243,13 +256,12 @@ if __name__ == '__main__':
                 json_path = '../db/' + sys.argv[2] + '.json'
             ret = test_label(arg, jsonpath=json_path)
             if ret is not None:
-                if len(ret) == 1:
-                    label = ret
-                else:
+                if isinstance(ret, tuple):
                     res, label = ret
                     print('%d/%d Correct' % (len(res.correct),
-                                            (len(res.correct) +
-                                                len(res.incorrect))))
+                                            (len(res.correct) + len(res.incorrect))))
+                else:
+                    label = ret
         else:
             print('Usage:\n\t\'python3 end_to_end.py <path>\'\n\
                     (path should be a file or directory).')
