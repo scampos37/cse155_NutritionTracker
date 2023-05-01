@@ -13,89 +13,145 @@
         <div class="chart"><canvas id="totalChart"></canvas></div>
         <div class="chart"><canvas id="mealChart"></canvas></div>
         <div class="totalValues">
-            <table style="width: 100%;">
-                <tr>
-                  <th>Type:</th>
-                  <th>Total Value</th>
-                </tr>
-                <tr>
-                  <td>Calories:</td>
-                  <td class="calVal">10</td>
-                </tr>
-                <tr>
-                  <td>Carbes:</td>
-                  <td class="carbVal">null</td>
-                </tr>
-                <tr>
-                  <td>Cholesterol:</td>
-                  <td class="cholVal">null</td>
-                </tr>
-                <tr>
-                  <td>Fiber:</td>
-                  <td class="fiberVal">null</td>
-                </tr>
-                <tr>
-                  <td>Mono Fat:</td>
-                  <td class="monoVal">null</td>
-                </tr>
-                <tr>
-                  <td>Poly Fat:</td>
-                  <td class="polyVal">null</td>
-                </tr>
-                <tr>
-                  <td>Potassium:</td>
-                  <td class="PotVal">null</td>
-                </tr>
-                <tr>
-                  <td>Protein:</td>
-                  <td class="ProVal">null</td>
-                </tr>
-                <tr>
-                  <td>Saturated Fat:</td>
-                  <td class="SatVal">null</td>
-                </tr>
-                <tr>
-                  <td>Sodium:</td>
-                  <td class="SodVal">null</td>
-                </tr>
-                <tr>
-                  <td>Sugars:</td>
-                  <td class="SugVal">null</td>
-                </tr>
-                <tr>
-                  <td>Total Fat:</td>
-                  <td class="TotalVal">null</td>
-                </tr>
-                <tr>
-                  <td>Trans Fat:</td>
-                  <td class="TransVal">null</td>
-                </tr>
-              </table>
+          <table class="table_1"id="table1">
+            <thead class="th">
+              <tr>
+                <th>Nutrient</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+          </table>
         </div>
+        <script class="totalValues">
+          
+          const fetchJSON = async () => {
+            const response = await fetch('http://localhost:8000/labelList.json');
+            const data = await response.json();
+            return data;
+          }
+
+          const createTotalTable = (totalNutrition) => {
+            console.log("createTable called")
+            let table = document.getElementById('table1');
+
+              // Create table rows and cells
+              Object.keys(totalNutrition).forEach((key, columnIndex) => {
+                let tableRow = document.createElement('tr');
+                let tableHeaderCell = document.createElement('th');
+                tableHeaderCell.textContent = key;
+                let tableCell = document.createElement('td');
+                tableCell.textContent = totalNutrition[key];
+                tableCell.id = key;
+                tableRow.appendChild(tableHeaderCell);
+                tableRow.appendChild(tableCell);
+                table.appendChild(tableRow);
+              });
+          };
+
+
+          fetchJSON()
+            .then((data) => {
+              const nutrition = [
+                "calories", 
+                "carbohydrates", 
+                "cholesterol", 
+                "fiber", 
+                "mono_fat", 
+                "poly_fat", 
+                "potassium", 
+                "protein", 
+                "saturated_fat", 
+                "sodium", 
+                "sugars", 
+                "total_fat", 
+                "trans_fat"
+              ];
+              const totalNutrition = {};
+
+              data.forEach((item) => {
+                for (let property in item) {
+                  if (item[property] === null) {
+                    item[property] = "0";
+                  }
+                }
+              });
+              nutrition.forEach((property) => {
+                totalNutrition[property] = data.reduce((sum, item) => {
+                  return sum + parseFloat(item[property]);
+                }, 0);
+              });
+
+              const groups = ["Breakfast", "Lunch", "Dinner", "Snack"];
+              const groupTotals = {};
+              
+              // Sum up the total calories for each food group
+              data.forEach((item) => {
+                const group = item.group;
+                if (groups.includes(group)) {
+                  if (groupTotals[group] === undefined) {
+                    groupTotals[group] = 0;
+                  }
+                  groupTotals[group] += parseFloat(item.calories);
+                }
+              });
+            
+              createTotalTable(totalNutrition);
+              generateTotalPieChart(totalNutrition);
+              createGroupTable(groupTotals);
+              generateGroupPieChart(groupTotals);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        
+        
+        // var table = document.querySelector("#myTable");
+  
+        // for (var i = 0; i < tvalues.length; i++) {
+                   
+        //    // Create a new row
+        //     trow = table.insertRow(-1);
+        //     for (var j = 0; j < cols.length; j++) {
+        //       var cell = trow.insertCell(-1);
+                          
+        //       // Inserting the cell at particular place
+        //       cell.innerHTML = tvalues[i][cols[j]];
+        //     }
+        //   }
+                
+        //   // Add the newly created table containing json data
+        //   var el = document.getElementById("myTable");
+        //   el.innerHTML = "";
+        //   el.appendChild(table);
+  
+  
+  
+        </script>  
         <div class="mealCals">
-          <table style="width: 100%;">
+          <table class="table" id="table2"style="width: 100%;">
             <tr>
               <th>Meal</th>
               <th>Calories</th>
             </tr>
-            <tr>
-              <td>Breakfast</td>
-              <td class="breakfast">null</td>
-            </tr>
-            <tr>
-              <td>Lunch</td>
-              <td class="lunch">null</td>
-            </tr>
-            <tr>
-              <td>Dinner</td>
-              <td class="dinner">null</td>
-            </tr>
-            <tr>
-              <td>Snacks</td>
-              <td class="snack">null</td>
-            </tr>
           </table>
         </div>
+        <script>
+          const createGroupTable = (groupTotals) => {
+            let groupTable = document.getElementById('table2');
+            // Create table rows and cells
+            Object.keys(groupTotals).forEach((key) => {
+              let tableRow = document.createElement('tr');
+              let tableHeaderCell = document.createElement('th');
+              tableHeaderCell.textContent = key;
+              let tableCell = document.createElement('td');
+              tableCell.textContent = groupTotals[key].toFixed(2);
+              tableRow.appendChild(tableHeaderCell);
+              tableRow.appendChild(tableCell);
+              groupTable.appendChild(tableRow);
+            });
+          };
+
+        </script>
         <div class="btns">
           <button type="button" class="delbtn">Delete Entry</button>
         </div>
