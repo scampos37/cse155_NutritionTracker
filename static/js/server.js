@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 
 const port = 8000;
-const filePath = '/Users/drew/CSE_155/cse155_NutritionTracker/LabelExtractionModel/Results/labelList.json';
+const filePath = '../../LabelExtractionModel/Results/labelList.json';
 
 const server = http.createServer((req, res) => {
   if (req.url === '/labelList.json' && req.method === 'GET') {

@@ -24,6 +24,7 @@
         </div>
         <script class="totalValues">
           
+          //Run server.js before loading page
           const fetchJSON = async () => {
             const response = await fetch('http://localhost:8000/labelList.json');
             const data = await response.json();
