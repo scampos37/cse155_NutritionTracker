@@ -68,6 +68,11 @@
     grid-row: span 1;
 }
 
+.goalTable{
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
 button{
     text-align: center;
     background-color: #068d9d;

@@ -42,7 +42,7 @@ class Goals(db.Model):
         self.sodium = sodium
         self.sugar = sugar
 
-db.create_all()
+# db.create_all()
 
 # Home page
 @app.route('/index')
