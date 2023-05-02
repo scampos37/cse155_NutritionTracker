@@ -18,12 +18,13 @@
             </div>
             <div class="txtEntry">
                 <form>
-                    <label for="servingsize">Serving Size:</label>
-                    <input type="number" id="servingsize" name="servingsize">
+                  <label for="servingsize">Serving Size:</label>
+                  <input type="number" id="servingsize" name="servingsize" value="1" min="1" max="100">
+                  <button id="confirm" >Apply</button>
                 </form>
             </div>
             <div class="dataTables">
-                <table style="width: 100%;">
+                <table id="table4"style="width: 100%;">
                     <tr>
                         <th colspan="2">Data Gathered</th>
                     </tr>
@@ -31,67 +32,81 @@
                       <th>Nutrition</th>
                       <th>Values</th>
                     </tr>
-                    <tr>
-                      <td>Calories:</td>
-                      <td class="calVal">10</td>
-                    </tr>
-                    <tr>
-                      <td>Carbes:</td>
-                      <td class="carbVal">null</td>
-                    </tr>
-                    <tr>
-                      <td>Cholesterol:</td>
-                      <td class="cholVal">null</td>
-                    </tr>
-                    <tr>
-                      <td>Fiber:</td>
-                      <td class="fiberVal">null</td>
-                    </tr>
-                    <tr>
-                      <td>Mono Fat:</td>
-                      <td class="monoVal">null</td>
-                    </tr>
-                    <tr>
-                      <td>Poly Fat:</td>
-                      <td class="polyVal">null</td>
-                    </tr>
-                    <tr>
-                      <td>Potassium:</td>
-                      <td class="PotVal">null</td>
-                    </tr>
-                    <tr>
-                      <td>Protein:</td>
-                      <td class="ProVal">null</td>
-                    </tr>
-                    <tr>
-                      <td>Saturated Fat:</td>
-                      <td class="SatVal">null</td>
-                    </tr>
-                    <tr>
-                      <td>Sodium:</td>
-                      <td class="SodVal">null</td>
-                    </tr>
-                    <tr>
-                      <td>Sugars:</td>
-                      <td class="SugVal">null</td>
-                    </tr>
-                    <tr>
-                      <td>Total Fat:</td>
-                      <td class="TotalVal">null</td>
-                    </tr>
-                    <tr>
-                      <td>Trans Fat:</td>
-                      <td class="TransVal">null</td>
-                    </tr>
                   </table>
             </div>
-            <div class="btns"><button id="cancelbtn">
+            <script>
+              const fetchJSON = async () => {
+                const response = await fetch('http://localhost:8000/ocr_results.json');
+                const data = await response.json();
+                return data;
+              }
+
+              const createTotalTable = (totalNutrition) => {
+                console.log("createTable called")
+                let table = document.getElementById('table4');
+
+                  // Create table rows and cells
+                  Object.keys(totalNutrition).forEach((key, columnIndex) => {
+                    let tableRow = document.createElement('tr');
+                    let tableHeaderCell = document.createElement('th');
+                    tableHeaderCell.textContent = key;
+                    let tableCell = document.createElement('td');
+                    tableCell.textContent = totalNutrition[key];
+                    tableCell.id = key;
+                    tableRow.appendChild(tableHeaderCell);
+                    tableRow.appendChild(tableCell);
+                    table.appendChild(tableRow);
+                  });
+              };
+
+              fetchJSON()
+                .then((data) => {
+                  const nutrition = [
+                    "calories", 
+                    "carbohydrates", 
+                    "cholesterol", 
+                    "fiber", 
+                    "mono_fat", 
+                    "poly_fat", 
+                    "potassium", 
+                    "protein", 
+                    "saturated_fat", 
+                    "sodium", 
+                    "sugars", 
+                    "total_fat", 
+                    "trans_fat"
+                  ];
+                  const newNutrition = {};
+
+                  data.forEach((item) => {
+                    for (let property in item) {
+                      if (item[property] === null) {
+                        item[property] = "0";
+                      }
+                    }
+                  });
+
+                  nutrition.forEach((property) => {
+                    newNutrition[property] = data.reduce((sum, item) => {
+                      return sum + parseFloat(item[property]);
+                    }, 0);
+                  });
+
+                  console.log(newNutrition);
+                
+                  createTotalTable(newNutrition);
+                })
+                .catch((error) => {
+                  console.error(error);
+                });
+
+            </script>
+            <div class="btns" ><button id="cancelbtn">
               <a href="{{url_for('index')}}">Submit</a>
             </button></div>
             <div class="btns"><button id="submitbtn">
               <a href="{{url_for('index')}}">Cancel</a>
             </button></div>
-            
         </div>
     </body>
 </html>
