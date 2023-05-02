@@ -183,3 +183,96 @@ const generateGroupPieChart = (groupTotals) => {
       }
     });
 };
+
+//http request to get data from database, onload
+const getData = () => {
+  const url = 'http://localhost:5000/goals';
+  fetch(url)
+    .then((res) => {
+      console.log(res);
+      return res.json();
+    }
+    ).then((data) => {
+      console.log(data);
+    }
+    ).catch((err) => {
+      console.log(err);
+    }
+    );
+};
+
+// API Calls to display from database and append to table
+// const getGoals = () => {
+//   let table_data = getElementById("user_goals");
+//   const url = 'http://localhost:5000/goals';
+//   fetch(url)
+//     .then((res) => {
+//       console.log(res);
+//       return res.json();
+//     }
+//     ).then((data) => {
+//       console.log(data);
+//       for (let i = 0; i < data.length;
+//         i++) {
+//         let row = table_data.insertRow();
+//         let cell1 = row.insertCell(0);
+//         let cell2 = row.insertCell(1);
+//         cell1.innerHTML = data[i].goal;
+//         cell2.innerHTML = data[i].value;
+//       }
+//     }
+//     ).catch((err) => {
+//       console.log(err);
+//     }
+//     );
+// };
+
+// const request = new XMLHttpRequest();
+// const url = 'http://localhost:5000/trees';
+
+// let text = document.getElementById("name of textbox");
+
+// function data_get() {
+
+//   request.open('GET', url);
+//   request.send();
+
+//   request.onload = () => text.innerText = request.responseText;
+// }
+
+async function getGoals() {
+
+  const res = new XMLHttpRequest();
+  const url = 'http://localhost:5000/goals';
+  
+  res.open('GET', url);
+  res.send();
+
+  res.onload = () => {
+    const data = JSON.parse(res.responseText);
+    console.log(data);
+    const table = document.getElementById("user_goals");
+    
+    const nutritionFacts = [
+      'Calories',
+      'Carbohydrates',
+      'Cholesterol',
+      'Fiber',
+      'MonoFat',
+      'PolyFat',
+      'Potassium',
+      'Protein',
+      'SaturatedFat',
+      'Sodium',
+      'Sugar'];
+    // create table rows and cells for data
+    for (let i = 0; i < data.length; i++) {
+      console.log(data[i]);
+      let row = table.insertRow();
+      let cell1 = row.insertCell(0);
+      let cell2 = row.insertCell(1);
+      cell1.innerHTML = nutritionFacts[i];
+      cell2.innerHTML = data[i];
+    }
+  }
+}
