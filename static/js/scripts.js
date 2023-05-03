@@ -299,7 +299,6 @@ async function getGoals() {
     // console.log(table1_values);
 
     for (let i = 0; i < data.length; i++) {
-      console.log(data[i]);
       let row = table.insertRow();
       let cell1 = row.insertCell(0);
       let cell2 = row.insertCell(1);
@@ -310,16 +309,16 @@ async function getGoals() {
       cell1.style.backgroundColor = "#bac4b3";
 
       //if value is greater than goal, change cell3 background color to red
-      if (data[i] < table1_values[i]) {
+      if ( data[i] >= table1_values[i] ) {
         cell3.style.backgroundColor = "green";
       }
-      else if (data[i] - table1_values[i] < 100) {
+      // yellow if less than 10% over goal
+      else if ( table1_values[i] < ( data[i] + ( data[i] * 0.10 ) ) ) {
         cell3.style.backgroundColor = "yellow";
       } else {
         cell3.style.backgroundColor = "red";
       }
-      cell3.style.borderLeft = "1px solid black";
-      
+      console.log(i)
     }
   }
 }
