@@ -114,3 +114,45 @@ table {
     padding: 8px;
     background-color: #bac4b3;
   }
+
+form{
+    display: grid;
+    margin: auto;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    grid-column: span 2;
+    /* background-color: red; */
+}
+
+label {
+    display: grid;
+    text-align: right;
+    margin-right: 20%;
+    margin-left: auto;
+    grid-column: span 1;
+    font-size: 20px;
+    /* background-color: blue; */
+}
+
+input{
+    display: grid;
+    margin: auto;
+    justify-content: center;
+    grid-column: span 1;
+    font-size: 20px;
+    /* background-color: yellow; */
+}
+
+input[type=submit]{
+    background-color: #068d9d;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+    grid-column: 2/3;
+}
+
+input[type=submit]:hover{
+    background-color: #36bdcd;
+    color: black;
+}
+
