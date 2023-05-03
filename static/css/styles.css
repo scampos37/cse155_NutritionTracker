@@ -34,7 +34,7 @@
 }
 
 .image{
-    border: solid black;
+    /* border: solid black; */
     grid-column: span 2;
     grid-row: span 3;
 }
@@ -77,6 +77,18 @@ button{
 }
 
 button:hover{
+    background-color: #36bdcd;
+    color: black;
+}
+
+input::file-selector-button{
+    background-color: #068d9d;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+}
+
+input::file-selector-button:hover{
     background-color: #36bdcd;
     color: black;
 }
