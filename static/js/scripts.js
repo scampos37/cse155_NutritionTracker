@@ -266,13 +266,34 @@ async function getGoals() {
       'Sodium',
       'Sugar'];
     // create table rows and cells for data
+
+    //get values from table1
+    let table1 = document.getElementById("table1");
+    let table1_data = table1.getElementsByTagName("td");
+    let table1_values = [];
+    for (let i = 0; i < table1_data.length; i++) {
+      table1_values.push(table1_data[i].innerHTML);
+    }
+    // console.log(table1_values);
+
     for (let i = 0; i < data.length; i++) {
       console.log(data[i]);
       let row = table.insertRow();
       let cell1 = row.insertCell(0);
       let cell2 = row.insertCell(1);
+      let cell3 = row.insertCell();
       cell1.innerHTML = nutritionFacts[i];
       cell2.innerHTML = data[i];
+
+      //if value is greater than goal, change cell3 background color to red
+      if (data[i] < table1_values[i]) {
+        cell3.style.backgroundColor = "green";
+      }
+      else if (table1_values[i] - data[i] < 100) {
+        cell3.style.backgroundColor = "yellow";
+      } else {
+        cell3.style.backgroundColor = "red";
+      }
     }
   }
 }
