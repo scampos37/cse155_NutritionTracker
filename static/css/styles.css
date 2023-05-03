@@ -59,7 +59,8 @@
 .btns{
     grid-column: span 1;
     grid-row: span 1;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 .dataTables{
     margin-left: 10%;

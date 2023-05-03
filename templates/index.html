@@ -162,11 +162,7 @@
           </button>
           
         </div>
-        <div class="goalTable">
-            <button id="reminder" onclick="getGoals()">Remind me of my Goals</button>
-            <button type="button" id="'addGoal">
-              <a href="{{url_for('input')}}">Add Goal</a>
-            </button>   
+        <div class="goalTable">    
           <table class="table1" id="user_goals">
             <thead class="th">
               <tr>
@@ -176,6 +172,8 @@
             </thead>
           </table>
         </div>
+        <div class="btns"><button type="button" reminder" onclick="getGoals()">Remind me of my Goals</button></div>
+        <div class="btns"><button type="button" id="'addGoal"><a href="{{url_for('input')}}">Add Goal</a> </button></div>
       </div>
       <script src="../static/js/scripts.js"></script>
     </body>
