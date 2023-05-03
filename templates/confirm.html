@@ -17,11 +17,11 @@
                 </select>
             </div>
             <div class="txtEntry">
-                <form>
-                  <label for="servingsize">Serving Size:</label>
-                  <input type="number" id="servingsize" name="servingsize" value="1" min="1" max="100">
-                  <button id="confirm" >Apply</button>
-                </form>
+              <form id="my-form">
+                <label for="servingsize">Serving size:</label>
+                <input type="number" id="servingsize" name="servingsize" value="1" min="1" max="100">
+                <button type="submit">Update</button>
+              </form>
             </div>
             <div class="dataTables">
                 <table id="table4"style="width: 100%;">
@@ -39,67 +39,107 @@
                 const response = await fetch('http://localhost:8000/ocr_results.json');
                 const data = await response.json();
                 return data;
-              }
-
-              const createTotalTable = (totalNutrition) => {
-                console.log("createTable called")
-                let table = document.getElementById('table4');
-
-                  // Create table rows and cells
-                  Object.keys(totalNutrition).forEach((key, columnIndex) => {
-                    let tableRow = document.createElement('tr');
-                    let tableHeaderCell = document.createElement('th');
-                    tableHeaderCell.textContent = key;
-                    let tableCell = document.createElement('td');
-                    tableCell.textContent = totalNutrition[key];
-                    tableCell.id = key;
-                    tableRow.appendChild(tableHeaderCell);
-                    tableRow.appendChild(tableCell);
-                    table.appendChild(tableRow);
-                  });
               };
 
-              fetchJSON()
-                .then((data) => {
-                  const nutrition = [
-                    "calories", 
-                    "carbohydrates", 
-                    "cholesterol", 
-                    "fiber", 
-                    "mono_fat", 
-                    "poly_fat", 
-                    "potassium", 
-                    "protein", 
-                    "saturated_fat", 
-                    "sodium", 
-                    "sugars", 
-                    "total_fat", 
-                    "trans_fat"
-                  ];
-                  const newNutrition = {};
-
-                  data.forEach((item) => {
-                    for (let property in item) {
-                      if (item[property] === null) {
-                        item[property] = "0";
-                      }
-                    }
-                  });
-
-                  nutrition.forEach((property) => {
-                    newNutrition[property] = data.reduce((sum, item) => {
-                      return sum + parseFloat(item[property]);
-                    }, 0);
-                  });
-
-                  console.log(newNutrition);
-                
-                  createTotalTable(newNutrition);
-                })
-                .catch((error) => {
-                  console.error(error);
+              const createConfirmTable = (totalNutrition) => {
+                let table = document.getElementById('table4');
+                Object.keys(totalNutrition).forEach((key, columnIndex) => {
+                  let tableRow = document.createElement('tr');
+                  let tableHeaderCell = document.createElement('th');
+                  tableHeaderCell.textContent = key;
+                  let tableCell = document.createElement('td');
+                  tableCell.textContent = totalNutrition[key];
+                  tableCell.id = key;
+                  tableRow.appendChild(tableHeaderCell);
+                  tableRow.appendChild(tableCell);
+                  table.appendChild(tableRow);
                 });
+              };
 
+              const updateData = async (servingsize) => {
+                const data = await fetchJSON();
+                const nutrition = [
+                  "calories", 
+                  "carbohydrates", 
+                  "cholesterol", 
+                  "fiber", 
+                  "mono_fat", 
+                  "poly_fat", 
+                  "potassium", 
+                  "protein", 
+                  "saturated_fat", 
+                  "sodium", 
+                  "sugars", 
+                  "total_fat", 
+                  "trans_fat"
+                ];
+              const newNutrition = {};
+
+              data.forEach((item) => {
+                for (let property in item) {
+                  if (item[property] === null) {
+                    item[property] = "0";
+                  }
+                }
+              });
+
+              nutrition.forEach((property) => {
+                newNutrition[property] = data.reduce((sum, item) => {
+                  return parseFloat(item[property]);
+                }, 0) * servingsize;
+              });
+
+              const table = document.getElementById('table4');
+              Object.keys(newNutrition).forEach((key) => {
+                const cell = table.querySelector(`#${key}`);
+                cell.textContent = newNutrition[key];
+              });
+              };
+
+              document.getElementById('my-form').addEventListener('submit', (event) => {
+              event.preventDefault();
+              const servingsizeElement = document.getElementById("servingsize");
+              const servingsizeValue = servingsizeElement.value;
+              updateData(servingsizeValue);
+              });
+
+              fetchJSON()
+              .then((data) => {
+                const nutrition = [
+                "calories", 
+                "carbohydrates", 
+                "cholesterol", 
+                "fiber", 
+                "mono_fat", 
+                "poly_fat", 
+                "potassium", 
+                "protein", 
+                "saturated_fat", 
+                "sodium", 
+                "sugars", 
+                "total_fat", 
+                "trans_fat"
+              ];
+              const totalNutrition = {};
+
+              data.forEach((item) => {
+                for (let property in item) {
+                  if (item[property] === null) {
+                    item[property] = "0";
+                  }
+                }
+              });
+              nutrition.forEach((property) => {
+                totalNutrition[property] = data.reduce((sum, item) => {
+                  return parseFloat(item[property]);
+                }, 0);
+              });
+            
+              createConfirmTable(totalNutrition);
+              })
+              .catch((error) => {
+                console.error(error);
+              });
             </script>
             <div class="btns" ><button id="cancelbtn">
               <a href="{{url_for('index')}}">Submit</a>
