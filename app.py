@@ -45,7 +45,8 @@ class Goals(db.Model):
 # db.create_all()
 
 # Home page
-@app.route('/index')
+@app.route('/')
+@app.route('/index')    
 def index():
     return render_template('index.html')
 
@@ -68,7 +69,7 @@ def entry_post():
 def confirm():
     return render_template('confirm.html')
 
-@app.route('/', methods=['GET','POST'])
+@app.route('/input', methods=['GET','POST'])
 def input():
 
      # get user info from html form
@@ -112,7 +113,9 @@ def input():
         db.session.commit()
 
         return redirect(url_for('index'))
-
+    
+    if request.method == 'GET':
+        return render_template('input.html')
     return render_template('input.html')
 
 # goals endpoint where data from input is passed to
