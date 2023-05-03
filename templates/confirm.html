@@ -7,30 +7,30 @@
     <body style="background-color: #CCD7C5;">
         <div class="grid-containerc">
             <div class="title2"><h1>Confirm Data</h1></div>
-            <div class="txtEntry">
-                <label for="mealchoice">Meal:</label>
-                <select name="mealchoice" id="mealchoice">
+            <div class="grid-containerc">
+                <label class="clabel" for="mealchoice">Meal:</label>
+                <select style="grid-column: span 1;" name="mealchoice" id="mealchoice">
                     <option value="breakfast">Breakfast</option>
                     <option value="lunch">Lunch</option>
                     <option value="dinner">Dinner</option>
                     <option value="snack">Snack</option>
                 </select>
             </div>
-            <div class="txtEntry">
+            <div style="grid-column: span 1;">
               <form id="my-form">
-                <label for="servingsize">Serving size:</label>
-                <input type="number" id="servingsize" name="servingsize" value="1" min="1" max="100">
-                <button type="submit">Update</button>
+                <label class="clabel" for="servingsize">Serving size:</label>
+                <input style="margin-right: 100%;" type="number" id="servingsize" name="servingsize" value="1" min="1" max="100">
+                <!-- <button type="submit">Update</button> -->
               </form>
             </div>
             <div class="dataTables">
                 <table id="table4"style="width: 100%;">
                     <tr>
-                        <th colspan="2">Data Gathered</th>
+                        <th colspan="2" style="text-align: center; border: 1px solid black;">Data Gathered</th>
                     </tr>
                     <tr>
                       <th>Nutrition</th>
-                      <th>Values</th>
+                      <th style="border-left: 1px solid black;">Values</th>
                     </tr>
                   </table>
             </div>
@@ -141,12 +141,15 @@
                 console.error(error);
               });
             </script>
-            <div class="btns" ><button id="cancelbtn">
-              <a href="{{url_for('index')}}">Submit</a>
-            </button></div>
+
             <div class="btns"><button id="submitbtn">
               <a href="{{url_for('index')}}">Cancel</a>
             </button></div>
+
+            <div class="btns" ><button id="cancelbtn">
+              <a href="{{url_for('index')}}">Submit</a>
+            </button></div>
+
         </div>
     </body>
 </html>
