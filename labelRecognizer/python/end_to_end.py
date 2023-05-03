@@ -227,7 +227,9 @@ def end_to_end(impath, show=False, demo=False):
     labels = []
     labels.append(ocr_label)
     
+    
     json_str = jsonpickle.encode(labels)
+    json_str["group"] = NULL;
 
     with open("ocr_results.json", "w") as f:
         f.write(json_str)
