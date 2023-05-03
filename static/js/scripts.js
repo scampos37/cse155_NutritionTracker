@@ -284,16 +284,20 @@ async function getGoals() {
       let cell3 = row.insertCell();
       cell1.innerHTML = nutritionFacts[i];
       cell2.innerHTML = data[i];
+      cell2.style.borderLeft = "1px solid black";
+      cell1.style.backgroundColor = "#bac4b3";
 
       //if value is greater than goal, change cell3 background color to red
       if (data[i] < table1_values[i]) {
         cell3.style.backgroundColor = "green";
       }
-      else if (table1_values[i] - data[i] < 100) {
+      else if (data[i] - table1_values[i] < 100) {
         cell3.style.backgroundColor = "yellow";
       } else {
         cell3.style.backgroundColor = "red";
       }
+      cell3.style.borderLeft = "1px solid black";
+      
     }
   }
 }

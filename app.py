@@ -142,7 +142,7 @@ def goals_data():
         print("Values from database: ", calories, carbs, cholesterol, fiber, monoFat, polyFat, potassium, protein, satFat, sodium, sugar)
 
         # return user info to frontend as json
-        return jsonify(calories, carbs, cholesterol, fiber, monoFat, polyFat, potassium, protein, satFat, sodium, sugar)
+        return jsonify(calories, calories, carbs, cholesterol, fiber, monoFat, polyFat, potassium, protein, satFat, sodium, sugar)
 
 if __name__ == '__main__':
-    app.run(debug=False, port=5000)
+    app.run(debug=True, port=5000)
