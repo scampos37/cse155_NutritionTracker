@@ -14,8 +14,8 @@
             <div class="image">
                 <img id="blah" src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" style="width: 100%; height: auto; margin:auto;" alt="your image" />
               </div>
-            <div class="btns">
-                <input type="file" onchange="readURL(this);"/>
+              <div class="btns">
+                <input id="import-button" type="file" onchange="readURL(this);" type="click"/>
             </div>
             <div class="btns">
                 <button class="takePicture">Take Picture</button>
@@ -41,24 +41,51 @@
               const createInputTable = (nutrition) => {
                 console.log("createTable called")
                 let table = document.getElementById('table3');
+                table.innerHTML = '';
 
-                  // Create table rows and cells
-                  Object.keys(nutrition).forEach((key, columnIndex) => {
-                    let tableRow = document.createElement('tr');
-                    let tableHeaderCell = document.createElement('th');
-                    tableHeaderCell.textContent = key;
-                    let tableCell = document.createElement('td');
-                    tableCell.textContent = nutrition[key];
-                    tableCell.id = key;
-                    tableRow.appendChild(tableHeaderCell);
-                    tableRow.appendChild(tableCell);
-                    table.appendChild(tableRow);
-                  });
+                // Check if there are already two rows in the table
+                let existingRows = table.getElementsByTagName('tr');
+                if (existingRows.length < 2) {
+                  // If not, add the first two rows
+                  let tableHeaderRow = document.createElement('tr');
+                  let tableHeaderCell = document.createElement('th');
+                  tableHeaderCell.setAttribute('colspan', '2');
+                  tableHeaderCell.textContent = 'Data Gathered';
+                  tableHeaderRow.appendChild(tableHeaderCell);
+                  table.appendChild(tableHeaderRow);
+
+                  let tableRow = document.createElement('tr');
+                  let tableHeaderCell1 = document.createElement('th');
+                  let tableHeaderCell2 = document.createElement('th');
+                  tableHeaderCell1.textContent = 'Nutrition';
+                  tableHeaderCell2.textContent = 'Values';
+                  tableRow.appendChild(tableHeaderCell1);
+                  tableRow.appendChild(tableHeaderCell2);
+                  table.appendChild(tableRow);
+                }
+
+                // Create table rows and cells for nutrition data
+                Object.keys(nutrition).forEach((key, columnIndex) => {
+                  let tableRow = document.createElement('tr');
+                  let tableHeaderCell = document.createElement('th');
+                  tableHeaderCell.textContent = key;
+                  let tableCell = document.createElement('td');
+                  tableCell.textContent = nutrition[key];
+                  tableCell.id = key;
+                  tableRow.appendChild(tableHeaderCell);
+                  tableRow.appendChild(tableCell);
+                  table.appendChild(tableRow);
+                });
               };
 
-              fetchJSON()
-                .then((data2) => {
-                  const nutrition = [
+
+              const importButton = document.getElementById('import-button');
+              importButton.addEventListener('click', async (event) => {
+                event.preventDefault();
+                const data2 = await fetchJSON();
+                fetchJSON()
+                  .then((data2) => {
+                    const nutrition = [
                     "calories", 
                     "carbohydrates", 
                     "cholesterol", 
@@ -73,7 +100,7 @@
                     "total_fat", 
                     "trans_fat"
                   ];
-                  const totalNutrition = {};
+                  const Nutrition = {};
 
                   data2.forEach((item) => {
                     for (let property in item) {
@@ -83,18 +110,36 @@
                     }
                   });
                   nutrition.forEach((property) => {
-                    totalNutrition[property] = data2.reduce((sum, item) => {
-                      return sum + parseFloat(item[property]);
+                    Nutrition[property] = data2.reduce((sum, item) => {
+                      return parseFloat(item[property]);
                     }, 0);
                   });
                 
-                  createInputTable(totalNutrition);
-                })
-                .catch((error) => {
-                  console.error(error);
-                });
+                  createInputTable(Nutrition);
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+              
+              createInputTable({
+                calories: 0,
+                carbohydrates: 0,
+                cholesterol: 0,
+                fiber: 0,
+                mono_fat: 0,
+                poly_fat: 0,
+                potassium: 0,
+                protein: 0,
+                saturated_fat: 0,
+                sodium: 0,
+                sugars: 0,
+                total_fat: 0,
+                trans_fat: 0
+              });
 
-                function readURL(input) {
+              function readURL(input) {
+                console.log("readURL called")
                     if (input.files && input.files[0]) {
                         var reader = new FileReader();
 

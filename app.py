@@ -142,4 +142,4 @@ def goals_data():
         return jsonify(calories, carbs, cholesterol, fiber, monoFat, polyFat, potassium, protein, satFat, sodium, sugar)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=False, port=5000)
