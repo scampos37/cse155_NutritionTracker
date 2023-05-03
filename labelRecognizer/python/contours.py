@@ -250,7 +250,7 @@ def contour(imagepath, invert=False, demo=False, orientation=1):
     thresh = adaptive_threshold(imgray)
 
     cv2.imwrite(filenames['thresholdg'], thresh)
-    image, contours, hierarchy = cv2.findContours(
+    contours, hierarchy = cv2.findContours(
         thresh.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
     )
 
