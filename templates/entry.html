@@ -3,6 +3,7 @@
     <head>
         <title>AddEntry</title>
         <link rel="stylesheet" href="../static/css/styles.css">
+        <script src="../static/js/scripts.js"></script>
         <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
         <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
@@ -16,6 +17,7 @@
             </div>
             <div class="btns">
                 <input id="import-button" type="file" onchange="readURL(this);"/>
+                <button type="importImage" onclick="uploadFile()">Upload Image</button>
             </div>
             <div class="btns">
                 <button class="takePicture">Take Picture</button>

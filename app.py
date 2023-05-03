@@ -59,14 +59,18 @@ def entry():
 # image upload page
 @app.route('/entry', methods=['POST'])
 def entry_post():
-    if request.method == 'POST':
+    #if request.method == 'POST':
+    if 'file' in request.files:
         f = request.files['file']
         f.save(f.filename)
         return redirect(url_for('confirm'))
+    else:
+        return 'No file found in request.'
     
 # display nutrition info
 @app.route('/confirm')
 def confirm():
+    print("redirected")
     return render_template('confirm.html')
 
 @app.route('/input', methods=['GET','POST'])
