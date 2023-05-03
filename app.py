@@ -62,7 +62,12 @@ def entry_post():
     #if request.method == 'POST':
     if 'file' in request.files:
         f = request.files['file']
-        f.save(f.filename)
+        #create a folder if it doesn't already exist
+        path = os.path.join(maindir, 'uploads')
+        if not os.path.isdir(path):
+            os.mkdir(path)
+        #save the file to the uploads folder
+        f.save(os.path.join(path, f.filename))
         return redirect(url_for('confirm'))
     else:
         return 'No file found in request.'
