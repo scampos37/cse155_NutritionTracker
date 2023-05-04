@@ -38,11 +38,17 @@
               <a href="{{url_for('index')}}">Cancel</a>
             </button></div>
 
-            <div class="btns" ><button id="submitbtn">
+            <div class="btns" ><button id="submitbtn" onclick="submits()">
               <a href="{{url_for('index')}}">Submit</a>
             </button></div>
 
             <script>
+              var newData = {};
+              function submits(){
+                console.log(newData);
+                
+              }
+
               const fetchJSON = async () => {
                 const response = await fetch('http://localhost:8000/ocr_results.json');
                 const data = await response.json();
@@ -93,6 +99,7 @@
                     item[property] = document.getElementById("mealchoice").value;
                   }
                   console.log(item[property]);
+                  newData[property] = item[property];
                 }
               });
 
@@ -117,6 +124,7 @@
               const servingsizeValue = servingsizeElement.value;
               updateData(servingsizeValue);
               });
+
 
               fetchJSON()
               .then((data) => {
@@ -152,11 +160,13 @@
               });
             
               createConfirmTable(totalNutrition);
+              
 
               })
               .catch((error) => {
                 console.error(error);
               });
+              
 
               
             </script>
