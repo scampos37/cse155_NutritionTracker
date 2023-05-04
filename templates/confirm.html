@@ -34,6 +34,14 @@
                     </tr>
                   </table>
             </div>
+            <div class="btns"><button id="cancelbtn">
+              <a href="{{url_for('index')}}">Cancel</a>
+            </button></div>
+
+            <div class="btns" ><button id="submitbtn">
+              <a href="{{url_for('index')}}">Submit</a>
+            </button></div>
+
             <script>
               const fetchJSON = async () => {
                 const response = await fetch('http://localhost:8000/ocr_results.json');
@@ -53,6 +61,7 @@
                   tableRow.appendChild(tableHeaderCell);
                   tableRow.appendChild(tableCell);
                   table.appendChild(tableRow);
+                  
                 });
               };
 
@@ -74,14 +83,20 @@
                   "trans_fat"
                 ];
               const newNutrition = {};
-
+              
               data.forEach((item) => {
                 for (let property in item) {
                   if (item[property] === null) {
                     item[property] = "0";
                   }
+                  if (property === "group"){
+                    item[property] = document.getElementById("mealchoice").value;
+                  }
+                  console.log(item[property]);
                 }
               });
+
+              
 
               nutrition.forEach((property) => {
                 newNutrition[property] = data.reduce((sum, item) => {
@@ -129,6 +144,7 @@
                   }
                 }
               });
+
               nutrition.forEach((property) => {
                 totalNutrition[property] = data.reduce((sum, item) => {
                   return parseFloat(item[property]);
@@ -136,19 +152,16 @@
               });
             
               createConfirmTable(totalNutrition);
+
               })
               .catch((error) => {
                 console.error(error);
               });
+
+              
             </script>
 
-            <div class="btns"><button id="submitbtn">
-              <a href="{{url_for('index')}}">Cancel</a>
-            </button></div>
-
-            <div class="btns" ><button id="cancelbtn">
-              <a href="{{url_for('index')}}">Submit</a>
-            </button></div>
+            
 
         </div>
     </body>
