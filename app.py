@@ -7,7 +7,7 @@ import os
 import json
 import sys
 sys.path.append('/labelRecognizer/python')
-import end_to_end 
+# import end_to_end 
 
 app = Flask(__name__)
 CORS(app)
