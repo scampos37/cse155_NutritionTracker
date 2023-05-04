@@ -226,14 +226,24 @@ def end_to_end(impath, show=False, demo=False):
     #Added by team to export results from model in the form of a JSON object
     labels = []
     labels.append(ocr_label)
+<<<<<<< Updated upstream
     
     
+=======
+
+>>>>>>> Stashed changes
     json_str = jsonpickle.encode(labels)
     json_str["group"] = NULL;
 
     with open("ocr_results.json", "w") as f:
         f.write(json_str)
     #
+    with open("ocr_results.json", "r") as f:
+        json_str = json.load(f)
+        json_str[0]["group"] = "none"
+    
+    with open("ocr_results.json", "w") as f:
+        json.dump(json_str, f)
 
 
     return ocr_label

@@ -5,6 +5,9 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 import os
 import json
+import sys
+sys.path.append('/labelRecognizer/python')
+import end_to_end 
 
 app = Flask(__name__)
 CORS(app)
@@ -153,5 +156,15 @@ def goals_data():
         # return user info to frontend as json
         return jsonify(calories, carbs, cholesterol, fiber, monoFat, polyFat, potassium, protein, satFat, sodium, sugar)
 
+
+@app.route('/run_end_to_end', methods=['POST'])
+def run_end_to_end():
+    file = request.files['file']
+    file_path = '/uploads/8.jpg'
+    file.save(file_path)
+    result = end_to_end.main(['', file_path])  # pass arguments as a list
+    return f"Result: {result}"
+
+
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=False, port=5000)
