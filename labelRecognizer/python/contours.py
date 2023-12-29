@@ -2,16 +2,16 @@ import cv2
 import sys
 import os
 import math
-import random
 import numpy as np
 from categories import easy_labels
+import secrets
 
 
 def get_random_color():
     return (
-        random.randint(0, 255),
-        random.randint(0, 255),
-        random.randint(0, 255)
+        secrets.SystemRandom().randint(0, 255),
+        secrets.SystemRandom().randint(0, 255),
+        secrets.SystemRandom().randint(0, 255)
     )
 
 
